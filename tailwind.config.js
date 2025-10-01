@@ -7,4 +7,9 @@ export default {
   plugins: [
     require('daisyui'),
   ],
+
+  //Especificamos los temas que queremos usar
+  daisyui: {
+    themes: ["coffee"],
+  },
 }
