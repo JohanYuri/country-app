@@ -4,12 +4,12 @@ import { Region } from '../../interfaces/region.type';
 import { NgFor, NgIf } from '@angular/common';
 import { CountryService } from '../../services/country.service';
 import { Country } from '../../interfaces/country.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-by-region-page',
   standalone: true,
-  imports: [CountryListComponent, NgFor, NgIf],
+  imports: [CountryListComponent, NgFor, NgIf, RouterLink],
   templateUrl: './by-region-page.component.html',
 })
 
