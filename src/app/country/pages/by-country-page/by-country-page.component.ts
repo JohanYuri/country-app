@@ -3,15 +3,13 @@ import { SearchInputComponent } from "../../components/search-input/search-input
 import { CountryListComponent } from "../../components/country-list/country-list.component";
 
 @Component({
-  selector: 'app-by-capital-page',
+  selector: 'app-by-country-page',
   standalone: true,
   imports: [SearchInputComponent, CountryListComponent],
-  templateUrl: './by-capital-page.component.html',
-  })
-export class ByCapitalPageComponent {
-
-  onSearch(value: string) {
-    console.log({ value });
-  }
-
+  templateUrl: './by-country-page.component.html',
+})
+export class ByCountryPageComponent {
+onSearch($event: string) {
+throw new Error('Method not implemented.');
+}
 }
