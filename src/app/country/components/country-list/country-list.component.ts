@@ -13,6 +13,7 @@ export class CountryListComponent {
   @Input() countries: Country[] = []; // Define la propiedad como entrada
   @Input() isLoading: boolean = false; // Agrega la propiedad isLoading como entrada
 
+  
   trackByCca2(index: number, country: Country): string {
     return country.cca2;
   }

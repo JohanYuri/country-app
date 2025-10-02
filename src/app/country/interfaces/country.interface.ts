@@ -1,4 +1,6 @@
 export interface Country{
+subregion: any;
+region: any;
 
   cca2: string;
   flag: string;
@@ -6,5 +8,5 @@ export interface Country{
   name: string;
   capital: string;
   population: number;
-  
+
 }

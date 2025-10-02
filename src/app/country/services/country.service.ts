@@ -24,6 +24,7 @@ export class CountryService {
       .get<RESTCountry[]>(`${API_URL}/capital/${query}`)
       .pipe(
         map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+        delay(750),
         catchError(error =>{
           console.log('Error fetching ', error);
 
@@ -40,11 +41,28 @@ export class CountryService {
     return this.http.get<RESTCountry[]>(`${ API_URL }/name/${ query }`)
     .pipe(
       map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
-      delay(500),
+      delay(750),
       catchError(error =>{
         console.error('Error fetching countries:', error);
         return throwError(() => new Error(`No se encuentran coincidencias de: "${ query }"`));
       })
     )
   }
+
+
+  searchByCountryByAlphaCode( code: string ){
+    // code = query.toLowerCase();
+
+    return this.http.get<RESTCountry[]>(`${ API_URL }/alpha/${ code }`)
+    .pipe(
+      map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      map (countries => countries.at(0)),
+      delay(750),
+      catchError(error =>{
+        console.error('Error fetching countries:', error);
+        return throwError(() => new Error(`No se encuentran un país con el código: "${ code }"`));
+      })
+    )
+  }
+
 }
