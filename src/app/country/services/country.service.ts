@@ -11,7 +11,7 @@ const API_URL = 'https://restcountries.com/v3.1';
   providedIn: 'root'
 })
 export class CountryService {
-
+  
   private http = inject(HttpClient);
 
 
@@ -64,5 +64,29 @@ export class CountryService {
       })
     )
   }
+
+  searchByRegion( region: Region ): Observable<Country[]> {
+
+    if ( this.queryCacheCountry.has(region) ) {
+      // console.log('Cache Country: ', region);
+      return of ( this.queryCacheCountry.get(region)! );
+    }
+
+    console.log('msg a servidor por: ', region);
+
+    return this.http.get<RESTCountry[]>(`${ API_URL }/region/${ region }`)
+    .pipe(
+      map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      tap((countries) => this.queryCacheCountry.set(region, countries) ),
+      delay(500),
+      catchError(error =>{
+        console.error('Error fetching countries:', error);
+        return throwError(() => new Error(`No se encuentran coincidencias de: "${ region }"`));
+      })
+    )
+  }
+
+
+
 
 }

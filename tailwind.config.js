@@ -10,6 +10,6 @@ export default {
 
   //Especificamos los temas que queremos usar
   daisyui: {
-    themes: ["coffee"],
+    themes: ["sunset"],
   },
 }
