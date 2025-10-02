@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RESTCountry } from '../interfaces/rest-countries-interfaces';
-import { map, Observable, catchError, throwError } from 'rxjs';
+import { map, Observable, catchError, throwError, delay } from 'rxjs';
 import { Country } from '../interfaces/country.interface';
 import { CountryMapper } from '../mappers/country.mappers';
 
@@ -31,5 +31,20 @@ export class CountryService {
         })
       );
 
+  }
+
+
+  searchByCountry( query: string ): Observable<Country[]> {
+    query = query.toLowerCase();
+
+    return this.http.get<RESTCountry[]>(`${ API_URL }/name/${ query }`)
+    .pipe(
+      map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      delay(500),
+      catchError(error =>{
+        console.error('Error fetching countries:', error);
+        return throwError(() => new Error(`No se encuentran coincidencias de: "${ query }"`));
+      })
+    )
   }
 }
