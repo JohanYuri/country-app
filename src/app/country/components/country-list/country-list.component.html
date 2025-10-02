@@ -1,7 +1,6 @@
 <!-- Country list -->
 <section class="mt-5">
   <table class="table table-md mt-2 w-full">
-
     <thead>
       <tr>
         <th>#</th>
@@ -12,14 +11,14 @@
         <th></th>
       </tr>
     </thead>
-
     <tbody>
-      <tr>
-
+      <tr *ngFor="let country of countries; let index = index; trackBy: trackByCca2">
+        <td>{{ index + 1 }}</td>
+        <td>{{ country.flag }}</td>
+        <td>
+          <img [src]="country.flags.svg" [alt]="country.name.common">
+        </td>
       </tr>
     </tbody>
-
-
   </table>
-
 </section>
