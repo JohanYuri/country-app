@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
-import { RESTCountry } from '../../interfaces/rest-countries-interfaces';
+import { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'country-list',
@@ -9,9 +9,10 @@ import { RESTCountry } from '../../interfaces/rest-countries-interfaces';
   templateUrl: './country-list.component.html',
 })
 export class CountryListComponent {
-  @Input() countries: RESTCountry[] = []; // Define la propiedad como entrada
+  @Input() countries: Country[] = []; // Define la propiedad como entrada
+  @Input() isLoading: boolean = false; // Agrega la propiedad isLoading como entrada
 
-  trackByCca2(index: number, country: RESTCountry): string {
+  trackByCca2(index: number, country: Country): string {
     return country.cca2;
   }
 }
